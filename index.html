@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Fire Skins Edu</title>
+  <style>
+    /* Reset básico */
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif; }
+
+    body {
+      background: #1a1a1a;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 20px;
+      background: #111;
+      font-size: 2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    main {
+      flex: 1;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: #222;
+      border-radius: 10px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #0ff;
+    }
+
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 12px;
+      margin-top: 10px;
+      background: #0ff;
+      color: #111;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #0aa;
+      color: #fff;
+    }
+
+    .codiguin-box {
+      margin-top: 10px;
+      padding: 10px;
+      background: #111;
+      border: 2px solid #0ff;
+      border-radius: 5px;
+      font-weight: bold;
+      color: #0ff;
+      text-align: center;
+      font-family: monospace;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.8rem;
+      color: #888;
+      background: #111;
+    }
+  </style>
+</head>
+<body>
+
+<header>Free Fire Skins Edu</header>
+
+<main id="cards-container">
+  <!-- Cards serão inseridos via JS -->
+</main>
+
+<footer>Conteúdo ilustrativo.</footer>
+
+<script>
+  const items = [
+    { name: "Angélical Azul", prefix: "ANAZ", img: "https://via.placeholder.com/100?text=AZ" },
+    { name: "Angélical Vermelha", prefix: "ANVM", img: "https://via.placeholder.com/100?text=VM" },
+    { name: "Angélical Verde", prefix: "ANVD", img: "https://via.placeholder.com/100?text=VD" },
+    { name: "Angélical Amarela", prefix: "ANAM", img: "https://via.placeholder.com/100?text=AM" },
+    { name: "Angélical Branca", prefix: "ANBC", img: "https://via.placeholder.com/100?text=BC" },
+    { name: "Angélical Roxa", prefix: "ANRX", img: "https://via.placeholder.com/100?text=RX" },
+    { name: "Diamantes", prefix: "DMNT", img: "https://via.placeholder.com/100?text=DM" },
+    { name: "Passe Booyah", prefix: "BOOY", img: "https://via.placeholder.com/100?text=BO" },
+    { name: "Sukuna", prefix: "SKNA", img: "https://via.placeholder.com/100?text=SK" },
+    { name: "Gojo", prefix: "GOJ", img: "https://via.placeholder.com/100?text=GO" },
+    { name: "Itadori Tokens", prefix: "ITDR", img: "https://via.placeholder.com/100?text=IT" },
+    { name: "Megumi", prefix: "MGM", img: "https://via.placeholder.com/100?text=MG" },
+    { name: "Nobara", prefix: "NBR", img: "https://via.placeholder.com/100?text=NB" },
+    { name: "Barba Antiga", prefix: "BANT", img: "https://via.placeholder.com/100?text=BA" },
+    { name: "Bandeira Pirata", prefix: "BPIR", img: "https://via.placeholder.com/100?text=BP" },
+    { name: "Skins Evolutivas", prefix: "EVOL", img: "https://via.placeholder.com/100?text=EV" },
+    { name: "Verificado", prefix: "VERF", img: "https://via.placeholder.com/100?text=VF" }
+  ];
+
+  const container = document.getElementById("cards-container");
+
+  function generateCode(prefix) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let part1 = "";
+    let part2 = "";
+    for (let i=0; i<4; i++) {
+      part1 += chars.charAt(Math.floor(Math.random()*chars.length));
+      part2 += chars.charAt(Math.floor(Math.random()*chars.length));
+    }
+    return `${prefix}-${part1}-${part2}`;
+  }
+
+  items.forEach(item => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.innerHTML = `
+      <img src="${item.img}" alt="${item.name}">
+      <div>${item.name}</div>
+      <button>Gerar Codiguin</button>
+      <div class="codiguin-box" style="display:none;"></div>
+    `;
+    const button = card.querySelector("button");
+    const codeBox = card.querySelector(".codiguin-box");
+
+    button.addEventListener("click", () => {
+      codeBox.style.display = "block";
+      codeBox.textContent = "Processando...";
+      setTimeout(() => {
+        codeBox.textContent = generateCode(item.prefix);
+      }, 1500);
+    });
+
+    container.appendChild(card);
+  });
+</script>
+
+</body>
+  </html>
